@@ -58,6 +58,20 @@ head(R0_val)
 hist(R0_val, col = "grey", border = "white")
 
 
+## ----clean_labels--------------------------------------------------------
+x <- " Thîs- is A   wêïrD LäBeL .."
+x
+clean_labels(x)
+
+variables <- c("Date.of.ONSET ",
+               "/  date of hôspitalisation  /",
+               "-DäTÈ--OF___DîSCHARGE-",
+               "GEndèr/",
+               "  Location. ")
+variables
+clean_labels(variables)
+
+
 ## ------------------------------------------------------------------------
 
 first_name <- c("Jane", "Joe", "Raoul", "Raoul")
