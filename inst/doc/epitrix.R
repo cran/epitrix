@@ -53,7 +53,7 @@ r2R0(f$info$r.conf, si$d(1:100))
 
 ## ----sample_R0-----------------------------------------------------------
 
-R0_val <- lm2R0_sample(f$lm, si$d(1:100), n = 100)
+R0_val <- lm2R0_sample(f$model, si$d(1:100), n = 100)
 head(R0_val)
 hist(R0_val, col = "grey", border = "white")
 
