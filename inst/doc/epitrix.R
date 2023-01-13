@@ -1,4 +1,4 @@
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>", 
@@ -7,18 +7,18 @@ knitr::opts_chunk$set(
   fig.path="figs-overview/"
 )
 
-## ----generate_data-------------------------------------------------------
+## ----generate_data------------------------------------------------------------
 library(epitrix)
 
 mu <- 15.3 # mean in days days
 sigma <- 9.3 # standard deviation in days
-cv <- mu/sigma # coefficient of variation
+cv <- sigma / mu # coefficient of variation
 cv
 param <- gamma_mucv2shapescale(mu, cv) # convertion to Gamma parameters
 param
 
 
-## ----si------------------------------------------------------------------
+## ----si-----------------------------------------------------------------------
 
 si <- distcrete::distcrete("gamma", interval = 1,
                shape = param$shape,
@@ -32,13 +32,13 @@ hist(x, col = "grey", border = "white",
      main = "Simulated serial intervals")
 
 
-## ----fit-----------------------------------------------------------------
+## ----fit----------------------------------------------------------------------
 
 si_fit <- fit_disc_gamma(x)
 si_fit
 
 
-## ----fit_i---------------------------------------------------------------
+## ----fit_i--------------------------------------------------------------------
 
 library(outbreaks)
 library(incidence)
@@ -51,14 +51,14 @@ r2R0(f$info$r, si$d(1:100))
 r2R0(f$info$r.conf, si$d(1:100))
 
 
-## ----sample_R0-----------------------------------------------------------
+## ----sample_R0----------------------------------------------------------------
 
 R0_val <- lm2R0_sample(f$model, si$d(1:100), n = 100)
 head(R0_val)
 hist(R0_val, col = "grey", border = "white")
 
 
-## ----clean_labels--------------------------------------------------------
+## ----clean_labels-------------------------------------------------------------
 x <- " Thîs- is A   wêïrD LäBeL .."
 x
 clean_labels(x)
@@ -72,7 +72,11 @@ variables
 clean_labels(variables)
 
 
-## ------------------------------------------------------------------------
+## ----protect_labels-----------------------------------------------------------
+vars <- c("Death in Structure  > 4h", "death in Structure < 4h")
+clean_labels(vars, protect = "><")
+
+## ---- R.options = list(width = 100)---------------------------------------------------------------
 
 first_name <- c("Jane", "Joe", "Raoul", "Raoul")
 last_name <- c("Doe", "Smith", "Dupont", "Dupond")
@@ -81,8 +85,12 @@ age <- c(25, 69, 36, 36)
 ## detailed output by default
 hash_names(first_name, last_name, age)
 
-## short labels for practical use
+## short labels for practical use, using a faster (but less secure) algorithm
 hash_names(first_name, last_name, age,
-           size = 8, full = FALSE)
+           size = 8, full = FALSE, hashfun = sodium::sha256)
+
+## adding a salt for extra security
+hash_names(first_name, last_name, age,
+           salt = "Keep it secret")
 
 

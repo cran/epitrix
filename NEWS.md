@@ -1,9 +1,58 @@
+# epitrix 0.4.0
+
+## New Functions
+
+* `AR2R0`: calculate the R0 corresponding to a give attack rate
+* `R02AR`: calculate the attack rate corresponding to a give R0
+* `R02herd_immunity_threshold`: calculate the herd immunity threshold for a given R0
+* `sim_linelist`: simulates a simple linelist (with no epi model implied) `data.frame`
+
+## Bug fixes
+
+* removed the dependency on the *linelist* package by RECON 
+* updated testing infrastructure to testthat 3rd edition
+* replaced appveyor and travis by github actions for continuous integration
+* fixed LaTeX conversion issues due to non-latin symbols in the example of
+  `clean_labels()`
+
+# epitrix 0.3.0
+
+## New Functions
+
+ - `emperical_incubation_dist()` will estimate the empirical incubation
+   distribution if given a data frame with dates of onset and a range of
+   exposure dates (@ffinger, #13)
+ - `fit_gamma_incubation_dist()` wraps `empirical_incubation_dist()` and 
+   `fit_disc_gamma()` to fit a discretized gamma distribution to the empirical
+   incubation distribution results (@ffinger, #13).
+
+## New Features
+
+ - `clean_labels()` gains the `protect` argument to protect meaningful symbols
+   in the data.
+ - `hash_names()` now has the `hashfun` option that allows users to specify
+   either a "fast" or "secure" hashing function to use (@zkamvar, #21).
+
+## New Vignettes
+
+ - "Estimating Incubation Period" shows the use of empirical incubation dist.
+
+## New Imports
+
+ - functions from `dplyr`, `purrr`, `rlang`, and `tidyr` are now imported.
+
+## Bug Fix
+
+ - `clean_labels()` can now handle non-latin characters and gains the `trans_id`
+   argument, which allows the user to customise the transformations 
+   (see https://github.com/reconhub/epitrix/issues/19 for details).
+
 # epitrix 0.2.2
 
  - Replace `digest` with `sodium` in Imports
  - Use `sodium::scrypt()` as a more cryptographically secure hashing algorithm
    for `hash_names()`. Thanks to @dirkschumacher for this addition. For details,
-   see https://github.com/reconhub/epitrix/pull/7. 
+   see https://github.com/reconhub/epitrix/pull/7.
  - Fix LICENSE file to show who the copyright holder is.
 
 # epitrix 0.2.1
@@ -15,7 +64,7 @@
 - added function `clean_labels` which can be used to standardise labels in variables,
   removing non-ascii characters, standardising separators, and more; now used in
   `hash_names`
-  
+
 
 
 # epitrix 0.1.2
@@ -49,7 +98,3 @@ First release of the package! This includes the following features:
 - `r2R0`: compute R0 from r
 
 - `lm2R0_sample`: genrate samples of R0 from a log-linear regression
-
-
-
-

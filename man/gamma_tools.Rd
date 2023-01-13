@@ -10,8 +10,15 @@ gamma_shapescale2mucv(shape, scale)
 
 gamma_mucv2shapescale(mu, cv)
 
-gamma_log_likelihood(x, mu, cv, discrete = TRUE, interval = 1, w = 0,
-  anchor = 0.5)
+gamma_log_likelihood(
+  x,
+  mu,
+  cv,
+  discrete = TRUE,
+  interval = 1,
+  w = 0,
+  anchor = 0.5
+)
 }
 \arguments{
 \item{shape}{The shape parameter of the Gamma distribution.}
@@ -88,7 +95,6 @@ gamma_shapescale2mucv(shape, scale) # compare with mu, cv
 gamma_sample <- rgamma(n = 10000, shape = shape, scale = scale)
 mean(gamma_sample) # compare to mu
 sd(gamma_sample) / mean(gamma_sample) # compare to cv
-
 }
 \author{
 Code by Anne Cori \email{a.cori@imperial.ac.uk}, packaging by
